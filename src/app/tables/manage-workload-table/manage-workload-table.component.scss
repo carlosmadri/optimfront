@@ -1,0 +1,82 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+table {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+  border-collapse: unset;
+
+  .table-element {
+    min-width: 112px;
+  }
+  .description {
+    min-width: 312px;
+  }
+  .date-range {
+    height: 0;
+    width: 0;
+  }
+
+  .pointer {
+    cursor: pointer;
+  }
+  .has-lever {
+    color: map.get(optim-theme.$palette, graph-orange);
+  }
+}
+
+tr {
+  &.detail-row {
+    height: 0;
+    td {
+      border-bottom: 1px solid map.get(optim-theme.$palette, grey2);
+    }
+  }
+
+  &.element-row {
+    background: map.get(optim-theme.$palette, grey1);
+    td {
+      border: none;
+    }
+  }
+
+  &.element-row:not(.expanded-row):hover {
+    background: map.get(optim-theme.$palette, grey2);
+  }
+
+  &.expanded-row:hover {
+    background: map.get(optim-theme.$palette, grey2);
+  }
+}
+
+.expanded-element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  &.expanded {
+    border-bottom: 1px solid map.get(optim-theme.$palette, grey2);
+  }
+
+  .expanded-element-row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .expanded-element-col {
+    padding: 8px;
+    align-content: center;
+    display: grid;
+  }
+}
+.no-go {
+  background: map.get(optim-theme.$palette, white);
+  color: map.get(optim-theme.$palette, grey2);
+}
+
+.table-paginator {
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+}

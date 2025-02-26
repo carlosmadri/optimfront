@@ -1,0 +1,62 @@
+@if (previewData(); as previewData) {
+  <div class="container">
+    <span class="content section-title">kHrs</span>
+    <div class="content">
+      <div class="content__title">{{ previewData.exercise }}</div>
+      <div class="content__value">{{ previewData.khrs }}</div>
+    </div>
+
+    <div class="content">
+      <mat-icon class="icon-gradient1">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div class="content">
+      <div class="content__title highlight1">Preview</div>
+      <div class="content__value highlight1">{{ previewData.previsionkHrs }}</div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="content">
+      <div class="content__title">WL Actuals EoY</div>
+      <div class="content__value">0</div>
+      <div class="content__subtitle">Projection with May Actuals</div>
+    </div>
+
+    <div class="separator"></div>
+
+    <span class="content section-title">FTE</span>
+    <div class="content">
+      <div class="content__title">{{ previewData.exercise }}</div>
+      <div class="content__value">{{ previewData.fte }}</div>
+    </div>
+
+    <div class="content">
+      <mat-icon class="icon-gradient1">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div class="content">
+      <div class="content__title highlight1">Preview</div>
+      <div class="content__value highlight1">{{ previewData.previsionFte }}</div>
+    </div>
+
+    <div class="content">
+      <mat-icon class="icon-gradient2">keyboard_arrow_right</mat-icon>
+    </div>
+
+    <div class="content">
+      <div class="content__title">Avg Capacity</div>
+      <div class="content__value">0</div>
+      <div class="content__subtitle">Realistic View</div>
+    </div>
+
+    <div class="separator"></div>
+
+    <div class="content">
+      <div class="content__title highlight2">HC Max Ceiling</div>
+      <div class="content__value highlight2">0</div>
+    </div>
+  </div>
+} @else {
+  <div class="no-data">No data available</div>
+}

@@ -1,0 +1,31 @@
+@use 'optim-theme';
+@use 'widget';
+@use 'buttons';
+
+@include buttons.table-header-button;
+@include buttons.widget-title-button;
+@include widget.widget;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.workout-columns1 {
+  display: grid;
+  grid-template-columns: 50% 1fr 1fr;
+  gap: 10px;
+}
+
+.workout-columns2 {
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: 35% 1fr 1fr 1fr;
+  gap: 30px 10px;
+}
+
+.monthly-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

@@ -1,0 +1,16 @@
+<div id="chart">
+  @if (chartOptions(); as chartOptions) {
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [colors]="chartOptions.colors"
+      [theme]="chartOptions.theme"
+      [grid]="chartOptions.grid"
+      [plotOptions]="chartOptions.plotOptions"
+      [legend]="chartOptions.legend"
+      [tooltip]="chartOptions.tooltip"
+    />
+  }
+</div>

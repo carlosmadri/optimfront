@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+:host {
+  .lever-dialog {
+    .lever-warning {
+      color: map.get(optim-theme.$palette, widget-yellow);
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: start;
+      margin-bottom: 10px;
+    }
+    .lever-tooltip {
+      color: map.get(optim-theme.$palette, widget-yellow);margin-bottom: 10px;
+      position: absolute;
+      right: 40px;
+    }
+    .lever-form {
+      display: grid;
+      .mat-mdc-form-field {
+        margin: 0 10px 0 0;
+        width: auto;
+      }
+      .lever-destination {
+        display: grid;
+        grid-auto-flow: column;
+        .small-input {
+          width: 100px;
+        }
+        .large-input {
+          width: 380px;
+        }
+      }
+      .section {
+        display: grid;
+        .form-section {
+          border-radius: 10px;
+          border: thin solid;
+          padding: 10px;
+          margin-top: -10px;
+          margin-bottom: 10px;
+          display: grid;
+          grid-auto-flow: column;
+        }
+        .title {
+          margin-left: 20px;
+          position: relative;
+          z-index: 1000;
+          background-color: #faf9f9;
+          padding-left: 5px;
+          padding-right: 5px;
+          width: fit-content;
+        }
+      }
+    }
+  }
+}

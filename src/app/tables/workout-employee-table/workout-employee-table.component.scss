@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table-content {
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+  box-shadow: none;
+}
+
+.filter-container {
+  display: flex;
+}
+
+.mat-mdc-cell {
+  border-color: map.get(optim-theme.$palette, grey2);
+}
+
+.mat-mdc-row {
+  background-color: map.get(optim-theme.$palette, grey1);
+}
+
+.mat-mdc-row:hover {
+  background-color: map.get(optim-theme.$primary, 95);
+}
+
+.no-border-top > td {
+  border: none;
+}

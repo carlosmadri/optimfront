@@ -1,0 +1,40 @@
+<div class="nav-container">
+  <a mat-button routerLink="/" class="home-buttom" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <mat-icon>trending_up</mat-icon>
+    Home
+  </a>
+  <mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="childrenAccessor">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <div class="node-wrapper">
+        <div class="node-line"></div>
+        @if (!node.isRoot) {
+          <div class="node-child-line"></div>
+        }
+        <div class="node-dot"></div>
+        <a [routerLink]="node.url">{{ node.name }}</a>
+      </div>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node
+      *matTreeNodeDef="let node; when: hasChild"
+      #treeNodes
+      matTreeNodePadding
+      matTreeNodeToggle
+      routerLinkActive="active"
+      isExpandable
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <div class="node-wrapper">
+        <div class="node-line"></div>
+        <div class="node-dot"></div>
+        <a routerLinkActive="active" [routerLink]="node.url">{{ node.name }}</a>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{ tree.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+          </mat-icon>
+        </button>
+      </div>
+    </mat-tree-node>
+  </mat-tree>
+</div>

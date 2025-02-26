@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="content">
+    <div class="content__title">Submission status</div>
+    @if (submissionStatus() === workloadSubmissionStatus.NOT_SUBMITTED) {
+      <div class="content__value status-red">{{ workloadSubmissionStatus.NOT_SUBMITTED }}</div>
+    } @else if (submissionStatus() === workloadSubmissionStatus.SUBMITTED) {
+      <div class="content__value status-green">{{ workloadSubmissionStatus.SUBMITTED }}</div>
+    } @else {
+      <div class="content__value">{{ submissionStatus() }}</div>
+    }
+  </div>
+  <div class="content">
+    <div class="content__title">Validation status</div>
+    @if (validationStatus() === workloadValidationStatus.VALIDATED) {
+      <div class="content__value status-green">{{ workloadValidationStatus.VALIDATED }}</div>
+    } @else if (validationStatus() === workloadValidationStatus.PENDING) {
+      <div class="content__value status-orange">{{ workloadValidationStatus.PENDING }}</div>
+    } @else if (validationStatus() === workloadValidationStatus.CHALLENGED) {
+      <div class="content__value status-red">{{ workloadValidationStatus.CHALLENGED }}</div>
+    } @else {
+      <div class="content__value">{{ validationStatus() }}</div>
+    }
+  </div>
+  <div class="content status-selector">
+    <div class="content__title">Exercise status</div>
+    <div class="content__value"><mat-slide-toggle class="red-green" [checked]="checked" /></div>
+  </div>
+</div>

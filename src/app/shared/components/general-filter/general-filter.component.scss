@@ -1,0 +1,40 @@
+@use 'optim-theme';
+@use 'widget';
+@use 'buttons';
+@use "sass:map";
+
+@include buttons.table-header-button;
+@include buttons.widget-button;
+@include widget.widget;
+
+.mat-icon {
+  margin: 0px 2px 0px -2px;
+  padding-left: 5px;
+}
+
+.widget-button {
+  margin-left: 0;
+}
+
+.general-filters {
+  .select-filter-values {
+    margin-left: 10px;
+  }
+
+  .delete-button {
+    background-color: map.get(optim-theme.$palette, theme-main);
+    color: map.get(optim-theme.$palette, white);
+    border-radius: 5px;
+    margin-left: 10px;
+    box-shadow: none;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+
+    .grid-end {
+      justify-self: end;
+    }
+  }
+}

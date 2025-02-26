@@ -1,0 +1,63 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+table {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+  border-collapse: unset;
+
+  .expansion-element {
+    width: 30px;
+  }
+  .has-lever {
+    color: map.get(optim-theme.$palette, graph-orange);
+  }
+}
+
+tr {
+  &.detail-row {
+    height: 0;
+    td {
+      border-bottom: 1px solid map.get(optim-theme.$palette, grey2);
+    }
+  }
+
+  &.element-row {
+    background: map.get(optim-theme.$palette, grey1);
+    td {
+      border: none;
+    }
+  }
+
+  &.element-row:not(.expanded-row):hover {
+    background: map.get(optim-theme.$palette, grey2);
+  }
+
+  &.expanded-row:hover {
+    background: map.get(optim-theme.$palette, grey2);
+  }
+}
+
+.expanded-element-detail {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+
+  &.expanded {
+    border-bottom: 1px solid map.get(optim-theme.$palette, grey2);
+  }
+
+  .expanded-element-col {
+    padding: 8px;
+    align-content: center;
+  }
+  .expanded-element-actions {
+    display: inline-grid;
+    align-content: space-evenly;
+  }
+}
+
+.table-paginator {
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+}

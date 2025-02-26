@@ -1,0 +1,63 @@
+@use 'optim-theme';
+@use 'widget';
+@use 'buttons';
+
+@include buttons.table-header-button;
+@include buttons.widget-button;
+@include widget.widget;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.workload-comments {
+  display: flex;
+  height: calc(100% - 10px);
+  align-items: center;
+}
+
+.worksync-columns1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.worksync-columns2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  &.w50 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.workload-workforce-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.workload-workforce-charts-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.workload-workforce-chart-content {
+  display: flex;
+  flex-direction: column;
+  height: calc( 50% - 20px);
+  margin-bottom: 20px;
+
+  h3 {
+    margin-top: 15px;
+    margin-left: 15px;
+    font-weight: 400;
+  }
+
+  .workload-workforce-chart-content--monthly {
+    flex-grow: 1;
+  }
+}

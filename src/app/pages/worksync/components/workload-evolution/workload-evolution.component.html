@@ -1,0 +1,20 @@
+@if (lineChartFiltered().length > 0) {
+  <div class="container">
+    @if (multipleSiglums()) {
+      <div class="select-grapth-container">
+        <mat-select [(value)]="selectedGraphType" (selectionChange)="onGraphChange()">
+          <mat-option [value]="graphTypes.ALL">View all</mat-option>
+          <mat-option [value]="graphTypes.APPROVED">Approved</mat-option>
+          <mat-option [value]="graphTypes.REJECTED">Rejected</mat-option>
+        </mat-select>
+      </div>
+    }
+    <div class="chart-container">
+      <optim-multibar-chart [chartData]="lineChartFiltered()!" />
+    </div>
+  </div>
+} @else {
+  <div class="no-data">
+    <p>No data available</p>
+  </div>
+}

@@ -1,0 +1,244 @@
+<table mat-table matSort multiTemplateDataRows class="mat-elevation-z8" [dataSource]="dataSource()!">
+  <ng-container matColumnDef="siglum">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="siglum">Siglum</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        type="select"
+        key="siglum"
+        [value]="element.siglum"
+        [go]="element.go"
+        [selectValues]="allSiglumHR()"
+        (sendObject)="editElement($event, element.id, 'siglum')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="description">Description</th>
+    <td *matCellDef="let element" mat-cell class="table-element description" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        key="description"
+        type="textarea"
+        [value]="element.description"
+        [go]="element.go"
+        (sendObject)="editElement($event, element.id, 'workload')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="own">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="own">OWN / SUB</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        type="select"
+        key="own"
+        [value]="element.own"
+        [go]="element.go"
+        [selectValues]="allOwns"
+        (sendObject)="editElement($event, element.id, 'workload')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="site">
+    <th *matHeaderCellDef mat-header-cell>Site</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        type="objectSelect"
+        [value]="element.site"
+        [go]="element.go"
+        [selectObjects]="allSites()"
+        (sendObject)="editElement($event, element.id, 'location')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="costCenter">
+    <th *matHeaderCellDef mat-header-cell>Cost Center</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        type="objectSelect"
+        [value]="element.costCenter"
+        [go]="element.go"
+        [selectObjects]="allCostCenterCodes()"
+        (sendObject)="editElement($event, element.id, 'costCenter')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="direct">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="direct">Dir / Ind</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input
+        type="select"
+        key="direct"
+        [value]="element.direct"
+        [go]="element.go"
+        [selectValues]="allDirect"
+        (sendObject)="editElement($event, element.id, 'workload')"
+      />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="timeline">
+    <th *matHeaderCellDef mat-header-cell>Timeline</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <span tabindex="0" class="pointer" (keydown)="element.go ? picker.open() : picker.close()" (click)="element.go ? picker.open() : picker.close()">
+        @if (element.id) {
+          {{ element.timeline }}
+        } @else {
+          {{ newWorkloadDates.startDate }}<br />{{ newWorkloadDates.endDate }}
+        }
+      </span>
+      <div class="date-range">
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" (dateChange)="dateEvent('startDate', $event, element.id)" />
+          <input matEndDate placeholder="End date" (dateChange)="dateEvent('endDate', $event, element.id)" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+        <mat-date-range-picker #picker />
+      </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="khrs">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="khrs">kHrs</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <optim-dynamic-input key="khrs" type="number" [value]="element.khrs" [go]="element.go" (sendObject)="editElement($event, element.id, 'workload')" />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="go">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="go">Go / No Go</th>
+    <td *matCellDef="let element" mat-cell class="table-element" [ngClass]="{ 'no-go': !element.go }">
+      <mat-slide-toggle [checked]="element.go" (change)="toggleGo(element.id, $event)" />
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="expand">
+    <th *matHeaderCellDef mat-header-cell aria-label="row actions">More</th>
+    <td
+      *matCellDef="let element"
+      mat-cell
+      class="pointer table-element"
+      [ngClass]="{ 'no-go': !element.go }"
+      (click)="element.expanded = !element.expanded && element.id"
+    >
+      <a aria-label="expand row"> More info </a>
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td *matCellDef="let element" mat-cell [attr.colspan]="workloadHeaderKeys.length" [ngClass]="{ 'no-go': !element.go }">
+      <div class="expanded-element-detail" [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'" [ngClass]="{ expanded: element.expanded }">
+        <div class="expanded-element-row">
+          <div class="expanded-element-col">
+            <span><b>Scenario</b></span>
+            <optim-dynamic-input key="scenario" [value]="element.scenario" [go]="element.go" (sendObject)="editElement($event, element.id, 'workload')" />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>Core / Non Core</b></span>
+            <optim-dynamic-input
+              key="core"
+              type="select"
+              [value]="element.core"
+              [go]="element.go"
+              [selectValues]="allCores"
+              (sendObject)="editElement($event, element.id, 'workload')"
+            />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>WC / BC</b></span>
+            <optim-dynamic-input
+              key="collar"
+              type="select"
+              [value]="element.collar"
+              [go]="element.go"
+              [selectValues]="allCollar"
+              (sendObject)="editElement($event, element.id, 'workload')"
+            />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>Efficiency for Cost Center</b></span>
+            <optim-dynamic-input
+              key="efficiency"
+              type="number"
+              [value]="element.efficiency"
+              [go]="element.go"
+              (sendObject)="editElement($event, element.costCenterId, 'costCenter')"
+            />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>Rate for Cost Center</b></span>
+            <optim-dynamic-input
+              key="rateOwn"
+              type="number"
+              [value]="element.rateOwn"
+              [go]="element.go"
+              (sendObject)="editElement($event, element.costCenterId, 'costCenter')"
+            />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>FTE Equivalent</b></span>
+            <span>{{ element.fte }}</span>
+          </div>
+          <div class="expanded-element-col">
+            <span><b>K Equivalent</b></span>
+            <optim-dynamic-input key="keur" type="number" [value]="element.keur" [go]="element.go" (sendObject)="editElement($event, element.id, 'workload')" />
+          </div>
+          <div class="expanded-element-col">
+            <span><b>EAC</b></span>
+            <optim-dynamic-input
+              key="eac"
+              type="boolean"
+              trueLabel="Yes"
+              falseLabel="No"
+              [value]="element.eac ? 'Yes' : 'No'"
+              [go]="element.go"
+              (sendObject)="editElement($event, element.id, 'workload')"
+            />
+          </div>
+        </div>
+        <div class="expanded-element-row">
+          <div class="expanded-element-col">
+            <span><b>PPSID</b></span>
+            <optim-dynamic-input
+              key="ppsid"
+              type="select"
+              [value]="element.ppsid"
+              [go]="element.go"
+              [selectValues]="allPpsids()"
+              (sendObject)="addPpsid($event, element.id)"
+            />
+          </div>
+          @if (element.ppsid_id) {
+            @for (ppsidKey of ppsidExpandedKeys; track ppsidKey; let idx = $index) {
+              <div class="expanded-element-col">
+                <span
+                  ><b>{{ ppsidLabels[idx] }}</b></span
+                >
+                <optim-dynamic-input
+                  [value]="element[ppsidKey]"
+                  [go]="element.go"
+                  [key]="ppsidKey"
+                  (sendObject)="editElement($event, element.ppsid_id, 'ppsid')"
+                />
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="workloadHeaderKeys" mat-header-row></tr>
+  <tr
+    *matRowDef="let element; columns: workloadHeaderKeys"
+    mat-row
+    class="element-row"
+    [ngClass]="{ 'no-go': !element.go }"
+    [class.expanded-row]="element.expanded"
+  ></tr>
+  <tr *matRowDef="let row; columns: ['expandedDetail']" mat-row class="detail-row"></tr>
+</table>
+
+<mat-paginator
+  class="table-paginator"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements"
+  [pageSizeOptions]="[5, 10, 20]"
+  [pageSize]="10"
+  [length]="totalWorkloads"
+/>

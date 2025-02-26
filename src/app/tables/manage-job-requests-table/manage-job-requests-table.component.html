@@ -1,0 +1,59 @@
+<table mat-table matSort class="mat-elevation-z8" [dataSource]="dataSource()">
+  <ng-container matColumnDef="siglumHR">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="siglumHR">SiglumHR</th>
+    <td *matCellDef="let element" mat-cell>{{ element.siglum?.siglumHR }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="workdayNumber">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="workdayNumber">Number</th>
+    <td *matCellDef="let element" mat-cell>{{ element.workdayNumber }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th *matHeaderCellDef mat-header-cell>Description</th>
+    <td *matCellDef="let element" mat-cell>{{ element.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="status">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="status">Status</th>
+    <td *matCellDef="let element" mat-cell>{{ element.status }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="activeWorkforce">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="activeWorkforce">Active Workforce</th>
+    <td *matCellDef="let element" mat-cell>{{ element.activeWorkforce }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="startDate">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header="startDate">Start Date</th>
+    <td *matCellDef="let element" mat-cell>{{ element.startDate | date: 'dd-MM-YYYY' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th *matHeaderCellDef mat-header-cell>Actions</th>
+    <td *matCellDef="let element" mat-cell>
+      <div class="edit-btn">
+        <button optimRoleProtected mat-icon-button aria-label="Edit button" (click)="onEditButton(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+      <div class="delete-btn">
+        <button optimRoleProtected mat-icon-button aria-label="Delete button" (click)="onDeleteButton(element)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+</table>
+
+<mat-paginator
+  class="table-paginator"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements"
+  [pageSizeOptions]="[5, 10, 20]"
+  [pageSize]="10"
+  [length]="totalJobRequests"
+/>

@@ -1,0 +1,24 @@
+import { environment } from '@environments/environment';
+
+export const GET_TOTAL_LEVERS_EOY = `${environment.apiUrl}employee/sum-levers-by-type`;
+export const GET_ALL_SIGLUMS = `${environment.apiUrl}siglums`;
+export const GET_ALL_LOCATIONS = `${environment.apiUrl}locations`;
+export const GET_FTE_LOCATIONS = `${environment.apiUrl}locations/coordinates-by-location`;
+export const GET_TEAM_OUTLOOK = `${environment.apiUrl}employee/team-outlook`;
+export const GET_MONTHLY_DISTRIBUTION = `${environment.apiUrl}employee/monthly-distribution`;
+export const GET_BORROWED_LEASED = `${environment.apiUrl}employee/borrowed-vs-leased`;
+export const GET_EMPLOYEE_DIRECT_RATIO = `${environment.apiUrl}employee/indirect-radio`;
+export const GET_EMPLOYEE_NAWF_REASON = `${environment.apiUrl}employee/naws-by-reason`;
+export const GET_JR_COUNT_BY_TYPE = `${environment.apiUrl}job-requests/count-by-type`;
+export const GET_ALL_EMPLOYEES = `${environment.apiUrl}employee`;
+export const CRUD_LEVER = `${environment.apiUrl}levers`;
+export const CRUD_JR = `${environment.apiUrl}job-requests`;
+export const GET_WORKLOAD_DIRECT_RATIO = `${environment.apiUrl}workloads/indirect-ratio`;
+export const GET_WORKLOAD_OWN_SUB_RATIO = `${environment.apiUrl}workloads/own-sub-ratio`;
+export const GET_WORKLOAD_PER_PROGRAM = `${environment.apiUrl}workloads/per-program`;
+export const CRUD_WORKLOAD = `${environment.apiUrl}workloads`;
+export const CRUD_PPSID = `${environment.apiUrl}ppsids`;
+export const GET_WORKLOAD_EVOLUTION = `${environment.apiUrl}workloads/evolution`;
+export const GET_WORKLOAD_WORKFORCE = `${environment.apiUrl}workloads/workforce`;
+export const GET_WORKLOAD_PREVIEW = `${environment.apiUrl}workloads/preview`;
+export const CRUD_COST_CENTER = `${environment.apiUrl}cost-centers`;

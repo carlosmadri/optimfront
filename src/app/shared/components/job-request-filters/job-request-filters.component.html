@@ -1,0 +1,43 @@
+<form class="form" [formGroup]="form" (submit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Siglum</mat-label>
+    <mat-select multiple formControlName="siglumHR">
+      @for (siglum of allSiglumsHR(); track siglum) {
+        <mat-option optimClickStopPropagation [value]="siglum">{{ siglum }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>JRNumber</mat-label>
+    <input matInput formControlName="workdayNumber" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select multiple formControlName="status">
+      @for (status of allJRStatus(); track status) {
+        <mat-option optimClickStopPropagation [value]="status">{{ status }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Active Workforce</mat-label>
+    <mat-select multiple formControlName="workerType">
+      @for (actWorkforce of allActiveWorkforce(); track actWorkforce) {
+        <mat-option optimClickStopPropagation [value]="actWorkforce">{{ actWorkforce }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="pickerStartDate" (dateChange)="formatDateValue('startDate', $event)" />
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerStartDate" />
+    <mat-datepicker #pickerStartDate startView="year" [startAt]="today" />
+  </mat-form-field>
+  <div class="form-footer">
+    <button mat-flat-button class="submit-button" type="submit">Submit</button>
+    @if (hasActiveFilters) {
+      <button mat-flat-button class="clear-button" (click)="onClear()">Clear Filters</button>
+    }
+  </div>
+</form>

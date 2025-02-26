@@ -1,0 +1,27 @@
+<mat-toolbar>
+  <mat-select class="test-role" [formControl]="userControl">
+    @for (user of USER_NAMES_TESTING; track user) {
+      <mat-option [value]="user">{{ user }}</mat-option>
+    }
+  </mat-select>
+  <optim-filter-year />
+  <button
+    optimClickStopPropagation
+    mat-icon-button
+    aria-label="Filter toggle button"
+    [ngClass]="{ 'active-filters': activeFilters }"
+    (click)="this.panelOpenState.set(!this.panelOpenState())"
+  >
+    <mat-icon>filter_alt</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-expansion-panel hideToggle [expanded]="panelOpenState()">
+  <optim-general-filter (activeFilters)="toggleActiveFilters($event)" (closeFilters)="closeFiltersPanel($event)" />
+</mat-expansion-panel>
+
+@if (notHome()) {
+  <div class="home-link">
+    <a routerLink="">Return home</a>
+  </div>
+}

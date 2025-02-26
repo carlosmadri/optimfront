@@ -1,0 +1,80 @@
+<form [formGroup]="form">
+  <div class="container form-dense">
+    <div class="content content-available">
+      <h3>Teams available</h3>
+      <mat-card appearance="outlined">
+        <div class="scroll">
+          <mat-selection-list [multiple]="true" (selectionChange)="onSelectionChange($event, 'allSiglums')">
+            @for (siglum of getSiglums('allSiglums'); track siglum.id) {
+              <mat-list-option [value]="siglum.id" [selected]="siglum.checked">
+                {{ siglum.name }}
+              </mat-list-option>
+            }
+          </mat-selection-list>
+        </div>
+      </mat-card>
+    </div>
+    <div class="content content-actions">
+      <div class="addActions">
+        <button mat-flat-button class="action-button action-button__add" (click)="addToSelected()">
+          <span class="button-text__add">{{ isSubmit() ? 'Submit' : 'Validate' }}</span>
+          <mat-icon class="add-icon">keyboard_arrow_right</mat-icon>
+        </button>
+        <br />
+        <button mat-stroked-button class="action-button" (click)="removeFromSelected()">
+          <mat-icon class="add-icon">keyboard_arrow_left</mat-icon>
+          <span class="button-text__add">Return</span>
+        </button>
+      </div>
+      @if (!isSubmit()) {
+        <div class="rejectActions">
+          <button mat-flat-button class="action-button action-button__reject" (click)="addToRejected()">
+            <span class="button-text__reject">Reject</span>
+            <mat-icon class="add-icon">keyboard_arrow_right</mat-icon>
+          </button>
+          <br />
+          <button mat-stroked-button class="action-button" (click)="removeFromRejected()">
+            <mat-icon class="add-icon">keyboard_arrow_left</mat-icon>
+            <span class="button-text__add">Return</span>
+          </button>
+        </div>
+      }
+    </div>
+    <div class="content content-selections">
+      <div class="selection-accepted">
+        <h3>{{ isSubmit() ? 'Submitted' : 'Validated' }} teams</h3>
+        <mat-card appearance="outlined">
+          <div class="scroll">
+            <mat-selection-list [multiple]="true" (selectionChange)="onSelectionChange($event, 'selectedSiglums')">
+              @for (siglum of getSiglums('selectedSiglums'); track siglum.id) {
+                <mat-list-option [value]="siglum.id" [selected]="siglum.checked">
+                  {{ siglum.name }}
+                </mat-list-option>
+              }
+            </mat-selection-list>
+          </div>
+        </mat-card>
+      </div>
+      @if (!isSubmit()) {
+        <div class="selection-rejected">
+          <h3>Rejected teams</h3>
+          <mat-card appearance="outlined">
+            <div class="scroll">
+              <mat-selection-list [multiple]="true" (selectionChange)="onSelectionChange($event, 'rejectedSiglums')">
+                @for (siglum of getSiglums('rejectedSiglums'); track siglum.id) {
+                  <mat-list-option [value]="siglum.id" [selected]="siglum.checked">
+                    {{ siglum.name }}
+                  </mat-list-option>
+                }
+              </mat-selection-list>
+            </div>
+          </mat-card>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="footer">
+    <button mat-stroked-button mat-dialog-close>Close</button>
+    <button mat-raised-button class="button-confirm" (click)="confirm()">Confirm</button>
+  </div>
+</form>

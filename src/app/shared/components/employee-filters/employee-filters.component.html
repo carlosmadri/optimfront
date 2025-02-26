@@ -1,0 +1,76 @@
+<form class="form" [formGroup]="form" (submit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Siglum</mat-label>
+    <mat-select multiple formControlName="siglumHR">
+      @for (siglum of allSiglumsHR(); track siglum) {
+        <mat-option optimClickStopPropagation [value]="siglum">{{ siglum }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Firstname</mat-label>
+    <input matInput formControlName="firstName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Lastname</mat-label>
+    <input matInput formControlName="lastName" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <mat-select multiple formControlName="country">
+      @for (country of allCountries(); track country) {
+        <mat-option optimClickStopPropagation [value]="country">{{ country }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Site</mat-label>
+    <mat-select multiple formControlName="site">
+      @for (siteValue of allSites(); track siteValue) {
+        <mat-option [value]="siteValue">{{ siteValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Direct/Indirect</mat-label>
+    <mat-select multiple formControlName="direct">
+      @for (direct of allDirects(); track direct) {
+        <mat-option optimClickStopPropagation [value]="direct">{{ direct }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Active Workforce</mat-label>
+    <mat-select multiple formControlName="activeWorkforce">
+      @for (actWorkforce of allActiveWorkforce(); track actWorkforce) {
+        <mat-option optimClickStopPropagation [value]="actWorkforce">{{ actWorkforce }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Availability Reason</mat-label>
+    <mat-select multiple formControlName="availabilityReason">
+      @for (reason of allAvailabilityReason(); track reason) {
+        <mat-option optimClickStopPropagation [value]="reason">{{ reason }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Contract Type</mat-label>
+    <mat-select multiple formControlName="contractType">
+      @for (contract of allContractType(); track contract) {
+        <mat-option optimClickStopPropagation [value]="contract">{{ contract }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Job</mat-label>
+    <input matInput formControlName="job" />
+  </mat-form-field>
+  <div class="form-footer">
+    <button mat-flat-button class="submit-button" type="submit">Submit</button>
+    @if (hasActiveFilters) {
+      <button mat-flat-button class="clear-button" (click)="onClear()">Clear Filters</button>
+    }
+  </div>
+</form>

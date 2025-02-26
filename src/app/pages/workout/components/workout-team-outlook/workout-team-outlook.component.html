@@ -1,0 +1,103 @@
+@if (teamOutlookData(); as toData) {
+  <div class="grid">
+    <div class="grid__item">
+      <section class="fte-total">
+        <div class="fte-total__header">Actuals</div>
+        <div class="fte-total__title">AWF + TEMP</div>
+        <div class="fte-total__value">{{ toData.fteTotalValue }}</div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="fte-total fte-total--nawf">
+        <div class="fte-total__header">&nbsp;</div>
+        <div class="fte-total__title">NAWF</div>
+        <div class="fte-total__value fte-total__value--nawf">{{ toData.fteNAWF }}</div>
+      </section>
+    </div>
+    <div class="grid__item grid__item--larger">
+      <section class="summary">
+        <div class="summary__header">Levers</div>
+        <div class="summary__box">
+          @for (lever of toData.leaversSummary; track lever.title) {
+            <div class="summary__row">
+              <div class="summary__label" [ngClass]="{ 'summary__label--negative': lever.value < 0 }">{{ lever.title }}</div>
+              <div class="summary__value summary__value--nawf">{{ lever.value }}</div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="summary summary--job-requests">
+        <div class="summary__header">Job Requisitions</div>
+        <div class="summary__box">
+          @for (jr of toData.jrSummary; track jr.title; let index = $index) {
+            <div class="summary__row" [ngClass]="{ 'summary__row--separator': index === 1 || index === 2 }">
+              <div class="summary__label summary__label--job-request">{{ jr.title }}</div>
+              <div class="summary__value">{{ jr.value }}</div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="summary">
+        <div class="summary__box summary__box--no-border">
+          <div class="summary__header">&nbsp;</div>
+          <div class="summary__row summary__row--double summary__row--arrow">
+            <div class="arrow">
+              <span class="arrow__text">Realistic View</span>
+            </div>
+          </div>
+          <div class="summary__row summary__row--arrow">
+            <div class="arrow">
+              <span class="arrow__text">Validation Required</span>
+            </div>
+          </div>
+          <div class="summary__row summary__row--arrow">
+            <div class="arrow">
+              <span class="arrow__text">Optimistic View</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="summary">
+        <div class="summary__box summary__box--no-border">
+          <div class="summary__header summary__header--numeric">End of Year</div>
+          @for (eoy of toData.eoySummary; track eoy.title; let index = $index) {
+            <div class="summary__row summary__row--numeric" [ngClass]="{ 'summary__row--double': index === 0 }">
+              <div class="summary__label" [ngClass]="'summary__label--numeric' + (index + 1)">{{ eoy.value }}</div>
+              <div class="summary__value">
+                <mat-icon [ngClass]="eoy.increase ? 'summary__arrow--up' : 'summary__arrow--down'">{{
+                  eoy.increase ? 'arrow_drop_up' : 'arrow_drop_down'
+                }}</mat-icon>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="ceiling">
+        <div class="ceiling__title">HC Ceiling</div>
+        <div class="ceiling__value">{{ toData.hcCeiling }}</div>
+      </section>
+    </div>
+    <div class="grid__item">
+      <section class="summary">
+        <div class="summary__box summary__box--no-border">
+          <div class="summary__header summary__header--numeric">Average</div>
+          @for (avg of toData.avgSummary; track avg.title; let index = $index) {
+            <div class="summary__row summary__row--numeric" [ngClass]="{ 'summary__row--double': index === 0 }">
+              <div class="summary__label" [ngClass]="'summary__label--numeric' + (index + 1)">{{ avg.value }}</div>
+            </div>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+} @else {
+  <div class="no-data"><span>No team outlook data available</span></div>
+}

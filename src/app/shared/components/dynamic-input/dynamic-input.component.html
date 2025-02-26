@@ -1,0 +1,78 @@
+<section tabindex="0" (click)="onClick()" (keydown)="onKeydown($event)">
+  @if (inputMode) {
+    @switch (useType()) {
+      @case ('textarea') {
+        <textarea tabindex="0" name="dynamic" optimAutoFocus [formControl]="valueControl" (focusout)="onFocusOut()"></textarea>
+      }
+      @case ('string') {
+        <input tabindex="0" optimAutoFocus type="text" [formControl]="valueControl" (focusout)="onFocusOut()" />
+      }
+      @case ('number') {
+        <input tabindex="0" optimAutoFocus type="number" [formControl]="valueControl" (focusout)="onFocusOut()" />
+      }
+      @case ('select') {
+        <input
+          #input
+          tabindex="0"
+          type="text"
+          optimAutoFocus
+          [formControl]="valueControl"
+          [matAutocomplete]="auto"
+          (input)="filter(input)"
+          (focus)="filter()"
+        />
+        <mat-autocomplete #auto="matAutocomplete" requireSelection autoActiveFirstOption (optionSelected)="onSelect($event)" (closed)="inputMode = false">
+          @for (filterValue of filteredValues; track filterValue) {
+            <mat-option [value]="filterValue">{{ filterValue }}</mat-option>
+          }
+        </mat-autocomplete>
+      }
+      @case ('objectSelect') {
+        <input
+          #input
+          tabindex="0"
+          type="text"
+          optimAutoFocus
+          [formControl]="valueControl"
+          [matAutocomplete]="auto"
+          (input)="filterObject(input)"
+          (focus)="filterObject()"
+        />
+        <mat-autocomplete #auto="matAutocomplete" requireSelection autoActiveFirstOption (optionSelected)="onObjectSelect($event)" (closed)="inputMode = false">
+          @for (object of filteredObjects; track object) {
+            <mat-option [value]="object">
+              <div class="object-select-option">
+                <div class="object-select-option-value">
+                  <b>Value</b>
+                  <span>{{ object.value }}</span>
+                </div>
+                <div class="object-select-option-description">
+                  <b>{{ object.label }}</b>
+                  <span>{{ object.description }}</span>
+                </div>
+              </div>
+            </mat-option>
+          }
+        </mat-autocomplete>
+      }
+      @case ('boolean') {
+        <input #input tabindex="0" type="text" optimAutoFocus [formControl]="valueControl" [matAutocomplete]="auto" />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          requireSelection
+          autoActiveFirstOption
+          (optionSelected)="onBooleanSelect($event)"
+          (closed)="inputMode = false"
+        >
+          <mat-option [value]="trueLabel()">{{ trueLabel() }}</mat-option>
+          <mat-option [value]="falseLabel()">{{ falseLabel() }}</mat-option>
+        </mat-autocomplete>
+      }
+      @default {
+        <input tabindex="0" optimAutoFocus type="text" [formControl]="valueControl" (focusout)="onFocusOut()" />
+      }
+    }
+  } @else {
+    <span class="text" [ngClass]="{ 'no-value-input': noValueInput }">{{ outputValue() }}</span>
+  }
+</section>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="graph-container">
+    <optim-line-chart [lineChartData]="chartData()" />
+  </div>
+  <div class="balance-container">
+    <div class="balance">
+      <div class="balance__title">&nbsp;</div>
+      <div class="balance__value--header">Average</div>
+    </div>
+    <div class="balance">
+      <div class="balance__title balance__title--borrowed">Borrowed</div>
+      <div class="balance__value">{{ borrowed() }}</div>
+    </div>
+    <div class="balance">
+      <div class="balance__title balance__title--leased">Leased</div>
+      <div class="balance__value">{{ leased() }}</div>
+    </div>
+    <div class="balance balance--with-separator">
+      <div class="balance__title balance__title--balance">Balance</div>
+      <div class="balance__value">{{ balance() }}</div>
+    </div>
+  </div>
+</div>

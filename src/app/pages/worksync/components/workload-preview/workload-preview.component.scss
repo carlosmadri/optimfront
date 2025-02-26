@@ -1,0 +1,82 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+
+  .content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      font-size: 0.8em;
+      color: map.get(optim-theme.$palette, grey3);
+
+      &.highlight1 {
+        color: map.get(optim-theme.$palette, widget-yellow);
+      }
+      &.highlight2 {
+        color: map.get(optim-theme.$palette, widget-blue1);
+      }
+    }
+
+    &__value {
+      font-size: 1.4em;
+      font-weight: 500;
+      padding: 3px 0;
+
+      &.highlight1 {
+        color: map.get(optim-theme.$palette, widget-yellow);
+      }
+      &.highlight2 {
+        color: map.get(optim-theme.$palette, widget-blue1);
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.6em;
+      color: map.get(optim-theme.$palette, grey3);
+    }
+  }
+
+  .section-title {
+    color: map.get(optim-theme.$palette, grey3);
+  }
+
+  .separator {
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      map.get(optim-theme.$primary, 60) 50%,
+      transparent 100%
+    );
+  }
+
+  mat-icon.mat-icon.icon-gradient1 {
+    color: map.get(optim-theme.$palette, widget-yellow);
+  }
+  
+  mat-icon.mat-icon.icon-gradient2 {
+    color: map.get(optim-theme.$palette, grey3);
+  }
+}
+
+.no-data {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

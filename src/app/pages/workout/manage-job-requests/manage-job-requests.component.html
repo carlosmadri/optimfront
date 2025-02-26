@@ -1,0 +1,23 @@
+<section class="widget outlook">
+  <h3>Team Outlook</h3>
+  <div class="widget-content">
+    <optim-workout-team-outlook />
+  </div>
+</section>
+
+<section>
+  <button mat-flat-button class="table-header-button" (click)="addJR()">Add JR</button>
+</section>
+
+<section class="table">
+  <mat-accordion multi>
+    <mat-expansion-panel class="filters-accordion">
+      <mat-expansion-panel-header>
+        <mat-panel-title><mat-icon [ngClass]="{ 'active-filters': activeFilters }">filter_alt</mat-icon> Filters </mat-panel-title>
+        <mat-panel-description> Only apply for this table </mat-panel-description>
+      </mat-expansion-panel-header>
+      <optim-job-request-filters (activeFilters)="toggleActiveFilters($event)" />
+    </mat-expansion-panel>
+  </mat-accordion>
+  <optim-manage-job-requests-table [refreshTable]="refreshTable()" (editJobRequest)="editJobRequest($event)" (deleteJobRequest)="deleteJobRequest($event)" />
+</section>

@@ -1,0 +1,11 @@
+<div class="container">
+  @if (sortedSummaryNAWF(); as nawfData) {
+    <div class="note">*Trainees and apprentices not included</div>
+    @for (data of nawfData; track data.availabilityReason; let index = $index) {
+      <div class="nawf-container">
+        <span class="name" [title]="data.availabilityReason">{{ data.availabilityReason }}</span>
+        <span class="value">{{ data.employeeCount }}</span>
+      </div>
+    }
+  }
+</div>

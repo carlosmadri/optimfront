@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+::ng-deep {
+  .cdk-overlay-pane {
+    width: auto !important;
+    .mat-mdc-option .mdc-list-item__primary-text {
+      width: 100%;
+    }
+  }
+}
+
+.object-select-option {
+  display: flex;
+  .object-select-option-value {
+    margin-right: 12px;
+  }
+  .object-select-option-description, .object-select-option-value {
+    width: 50%;
+    display: grid;
+  }
+}
+
+.text:hover {
+  background: map.get(optim-theme.$palette, grey1);
+  border-top: 1px solid map.get(optim-theme.$palette, grey2);
+}
+textarea {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  resize: none;
+}
+input {
+  width: 100%;
+  height: 100%;
+}
+.no-value-input {
+  color: map.get(optim-theme.$palette, grey2);
+}

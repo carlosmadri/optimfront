@@ -1,0 +1,25 @@
+<mat-accordion>
+  <mat-expansion-panel class="filters-accordion" [hideToggle]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title><mat-icon [ngClass]="{ 'active-filters': activeFilters() }">filter_alt</mat-icon> Filters </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="filter-form">
+      <form #form [formGroup]="filterForm">
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" (input)="onInputChange('firstName')" />
+          @if (filterForm.get('firstName')?.touched && filterForm.get('firstName')?.hasError('invalidLength')) {
+            <mat-error>{{ validatorMsg }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" (input)="onInputChange('lastName')" />
+          @if (filterForm.get('lastName')?.touched && filterForm.get('lastName')?.hasError('invalidLength')) {
+            <mat-error>{{ validatorMsg }}</mat-error>
+          }
+        </mat-form-field>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

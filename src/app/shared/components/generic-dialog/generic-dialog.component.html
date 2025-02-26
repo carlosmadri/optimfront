@@ -1,0 +1,11 @@
+<div class="dialog__header">
+  <div class="dialog__header-title">
+    <h3>{{ data.title }}</h3>
+  </div>
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+  @if (data.content) {
+    <ng-container [ngTemplateOutlet]="data.content" />
+  }
+</mat-dialog-content>

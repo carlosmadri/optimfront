@@ -1,0 +1,47 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .data{
+    display: flex;
+    justify-content: space-between;
+    margin: 0  15% 0 15%;
+
+    .title {
+      font-size: 1.0em;
+      &.direct {
+        color: map.get(optim-theme.$palette, widget-blue1);
+      }
+      &.indirect {
+        color: map.get(optim-theme.$palette, graph-red);
+      }
+    }
+
+    .value {
+      font-size: 1.0em;
+    }
+  }
+
+  .graph-header {
+    color: map.get(optim-theme.$palette, widget-blue1);
+    font-size: 0.9em;
+    text-align: center;
+    margin: 10px 0 5px 0;
+  }
+
+  .chart-container{
+    display: flex;
+    justify-content: center;
+    padding: 0 25%; 
+  }
+}

@@ -1,0 +1,44 @@
+@use '@angular/material' as mat;
+@use 'optim-theme';
+@use 'sass:map';
+
+:host {
+  display: flex;
+  height: 100%;
+}
+
+.container {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.select-grapth-container {
+  display: flex;
+  flex-direction: column;
+
+  .mat-mdc-select {
+    max-width: 100px;
+    @include mat.select-theme(optim-theme.$dark-theme);
+    border: 1px solid map.get(optim-theme.$palette, grey3);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.9em;
+  }
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.no-data {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

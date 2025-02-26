@@ -1,0 +1,22 @@
+<!-- eslint-disable @angular-eslint/template/no-inline-styles -->
+<div class="container">
+  <div class="chart-container">
+    <optim-donut-chart [data]="typesValues()" [title]="totalJRs()" [colors]="colors" />
+  </div>
+
+  @for (jrType of mappedSummaryTypes(); track jrType.type) {
+    <div class="jr-breakdown-row">
+      <div class="jr-breakdown-row-icon">
+        <span
+          ><mat-icon [ngStyle]="{ color: jrType.color }">{{ jrType.icon }}</mat-icon></span
+        >
+      </div>
+      <div class="jr-breakdown-row-title" [ngStyle]="{ ccolor: jrType.color }">
+        <span>{{ jrType.type }}</span>
+      </div>
+      <div class="jr-breakdown-row-value">
+        <span>{{ jrType.count }}</span>
+      </div>
+    </div>
+  }
+</div>

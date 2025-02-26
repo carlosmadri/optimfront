@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+:host {
+  .info {
+    color: map.get(optim-theme.$palette, widget-blue1);
+  }
+  .warning {
+    color: map.get(optim-theme.$palette, graph-orange);
+  }
+  .error {
+    color: map.get(optim-theme.$palette, widget-red1);
+  }
+  .icon {
+    margin-bottom: -7px;
+  }
+}

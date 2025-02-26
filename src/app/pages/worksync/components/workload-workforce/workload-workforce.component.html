@@ -1,0 +1,7 @@
+@if (lineChartFiltered(); as lineChartFiltered) {
+  <div #chart class="chart-container">
+    <optim-bar-chart [chartData]="lineChartFiltered" [containerHeight]="chartElementHeight()" />
+  </div>
+} @else {
+  <div class="no-data"><span>No team outlook data available</span></div>
+}

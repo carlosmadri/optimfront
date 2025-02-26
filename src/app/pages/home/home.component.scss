@@ -1,0 +1,13 @@
+@use 'optim-theme';
+@use 'widget';
+@use 'buttons';
+
+@include buttons.table-header-button;
+@include buttons.widget-button;
+@include widget.widget;
+
+.home-columns {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 15px;
+}

@@ -1,0 +1,68 @@
+<section class="widget outlook">
+  <h3>Team Outlook</h3>
+  <div class="widget-content">
+    <optim-workout-team-outlook />
+  </div>
+</section>
+
+<div class="workout-columns1">
+  <section class="widget">
+    <h3>Monthly Distribution</h3>
+    <div class="widget-content">
+      <div class="monthly-container">
+        <optim-chart-selector [selectorType]="'monthly'" />
+        <optim-workout-monthly-distribution [setChartSelectors]="true" />
+      </div>
+    </div>
+  </section>
+
+  <section class="widget">
+    <div class="title-with-button">
+      <h3>Levers Impacting EoY</h3>
+      <button mat-flat-button class="widget-title-button" (click)="openEmployeeDialog()">SEE ALL</button>
+    </div>
+    <div class="widget-content">
+      <optim-workout-levers-eoy />
+    </div>
+  </section>
+
+  <section class="widget">
+    <div class="title-with-button">
+      <h3>JR Breakdown</h3>
+      <button mat-flat-button class="widget-title-button" routerLink="/workout/manage-job-requests">SEE ALL</button>
+    </div>
+    <div class="widget-content">
+      <optim-workout-jr-breakdown />
+    </div>
+  </section>
+</div>
+
+<div class="workout-columns2">
+  <section class="widget">
+    <h3>FTE by location</h3>
+    <div class="widget-content">
+      <optim-workout-fte-location />
+    </div>
+  </section>
+
+  <section class="widget">
+    <h3>NAWF Breakdown</h3>
+    <div class="widget-content">
+      <optim-workout-nawf-breakdown />
+    </div>
+  </section>
+
+  <section class="widget">
+    <h3>Indirect Ratio</h3>
+    <div class="widget-content">
+      <optim-workout-indirect-ratio />
+    </div>
+  </section>
+
+  <section class="widget">
+    <h3>Borrowed vs Leased</h3>
+    <div class="widget-content">
+      <optim-workout-borrowed-leased />
+    </div>
+  </section>
+</div>

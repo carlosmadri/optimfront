@@ -1,0 +1,16 @@
+<div class="edit-container">
+  <div class="edit-checks" [formGroup]="formGraphChecks">
+    <div class="edit-workload">
+      <span>Workload</span>
+      @for (i of workloadChecksIndex(); track i) {
+        <mat-checkbox class="edit-check" [formControlName]="lineNames[i]">{{ lineLabels[i] }}</mat-checkbox>
+      }
+    </div>
+    <div class="edit-workforce">
+      <span>Workforce</span>
+      @for (i of workforceChecks; track i) {
+        <mat-checkbox class="edit-check" [formControlName]="lineNames[i]">{{ lineLabels[i] }}</mat-checkbox>
+      }
+    </div>
+  </div>
+</div>

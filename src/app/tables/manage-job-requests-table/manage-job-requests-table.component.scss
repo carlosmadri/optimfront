@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+table {
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+  border-collapse: unset;
+}
+
+tr {
+  &.detail-row {
+    height: 0;
+    td {
+      border-bottom: 1px solid map.get(optim-theme.$palette, grey2);
+    }
+  }
+
+  &.element-row {
+    background: map.get(optim-theme.$palette, grey1);
+    td {
+      border: none;
+    }
+  }
+}
+
+.table-paginator {
+  border: 1px solid map.get(optim-theme.$palette, grey1);
+}

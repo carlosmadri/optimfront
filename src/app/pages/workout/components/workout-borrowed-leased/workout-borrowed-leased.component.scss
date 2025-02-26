@@ -1,0 +1,61 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.graph-container {
+  margin-top: 10px;
+}
+
+.balance-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  min-width: 70%;
+
+  .balance {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+
+    &--with-separator {
+      border-top: 1px solid map.get(optim-theme.$palette, grey2);
+    }
+
+    &__value {
+      font-size: 1.2em;
+      font-weight: 500;
+
+      &--header {
+        color: map.get(optim-theme.$palette, widget-blue1);
+        font-size: 0.7em;
+      }
+    }
+
+    &__title {
+      font-size: 0.9em;
+
+      &--borrowed {
+        color: map.get(optim-theme.$palette, graph-orange);
+      }
+
+      &--leased {
+        color: map.get(optim-theme.$palette, widget-yellow);
+      }
+
+      &--balance {
+        color: map.get(optim-theme.$palette, widget-blue1);
+      }
+    }
+  }
+}

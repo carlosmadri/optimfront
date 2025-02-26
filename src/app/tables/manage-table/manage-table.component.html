@@ -1,0 +1,72 @@
+<table mat-table matSort multiTemplateDataRows class="mat-elevation-z8" [dataSource]="dataSource()!">
+  @for (column of columnsToDisplay; track column; let idx = $index) {
+    <ng-container [matColumnDef]="column">
+      <th *matHeaderCellDef mat-header-cell [mat-sort-header]="elementKeys[idx]">{{ column }}</th>
+      <td *matCellDef="let element" mat-cell [ngClass]="{ 'has-lever': elementKeys[idx] === 'firstName' && element['levers'].length > 0 }">
+        {{ element[elementKeys[idx]] }}
+      </td>
+    </ng-container>
+  }
+  <ng-container matColumnDef="expand">
+    <th *matHeaderCellDef mat-header-cell aria-label="row actions">&nbsp;</th>
+    <td *matCellDef="let element" mat-cell class="expansion-element">
+      @if (!element.impersonal) {
+        <button mat-icon-button aria-label="expand row" optimRoleProtected (click)="onAddButton($event, element)">
+          <mat-icon>add</mat-icon>
+        </button>
+      }
+    </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td *matCellDef="let element" mat-cell [attr.colspan]="columnsToDisplayWithExpand.length">
+      @for (lever of element.levers; track lever) {
+        <div
+          class="expanded-element-detail"
+          [@detailExpand]="element === expandedElement ? 'expanded' : 'collapsed'"
+          [ngClass]="{ expanded: element === expandedElement }"
+        >
+          <div class="expanded-element-col">
+            {{ lever.leverType }}
+          </div>
+          <div class="expanded-element-col">
+            {{ lever.startDate | date: 'dd-MM-YYYY' }}
+            <span class="example-element-description-attribution"> -- {{ lever.endDate | date: 'dd-MM-YYYY' }} </span>
+          </div>
+          <div class="expanded-element-col expanded-element-actions">
+            <div class="edit-btn">
+              <button optimRoleProtected mat-icon-button aria-label="Edit button" (click)="onEditButton(lever, element)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <div class="delete-btn">
+              <button optimRoleProtected mat-icon-button aria-label="Delete button" (click)="deleteLever(lever, element)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="columnsToDisplayWithExpand" mat-header-row></tr>
+  <tr
+    *matRowDef="let element; columns: columnsToDisplayWithExpand"
+    mat-row
+    class="element-row"
+    [class.expanded-row]="expandedElement === element"
+    (click)="expandedElement = expandedElement === element ? null : element"
+  ></tr>
+  <tr *matRowDef="let row; columns: ['expandedDetail']" mat-row class="detail-row"></tr>
+</table>
+
+<mat-paginator
+  class="table-paginator"
+  showFirstLastButtons
+  aria-label="Select page of periodic elements"
+  [pageSizeOptions]="[5, 10, 20]"
+  [pageSize]="10"
+  [length]="totalEmployees"
+/>

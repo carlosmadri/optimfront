@@ -1,0 +1,36 @@
+@if (chartData() && chartData().length > 0) {
+  <div class="container">
+    <div class="graph">
+      <optim-line-detail-chart [chartData]="chartData()" />
+    </div>
+    <div class="program-selector">
+      <div class="program-selector__header">
+        <div class="program-selector__title">Program</div>
+
+        <span class="program-selector__navigation">
+          <button mat-icon-button class="program-selector__navigation--button" [disabled]="!hasPrev()" (click)="prevProgram()">
+            <mat-icon class="program-selector__navigation--arrow">arrow_left</mat-icon>
+          </button>
+          <button mat-icon-button class="program-selector__navigation--button" [disabled]="!hasNext()" (click)="nextProgram()">
+            <mat-icon class="program-selector__navigation--arrow">arrow_right</mat-icon>
+          </button>
+        </span>
+      </div>
+
+      <div class="program-selector__name">{{ selectedProgram()?.name }}</div>
+
+      <div class="program-selector__list">
+        <div class="program-selector__value">{{ selectedProgram()?.khours }}</div>
+        <div class="program-selector__property">WL to Program</div>
+      </div>
+      <div class="program-selector__list">
+        <div class="program-selector__value">{{ selectedProgram()?.programs }}</div>
+        <div class="program-selector__property">Number of Projects</div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="no-data">
+    <div class="no-data__text">No data available</div>
+  </div>
+}

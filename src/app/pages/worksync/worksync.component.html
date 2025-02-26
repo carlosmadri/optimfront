@@ -1,0 +1,69 @@
+<div class="worksync-columns1">
+  <section class="widget worksync-header">
+    <div class="widget-content">
+      <optim-workload-status />
+    </div>
+  </section>
+
+  <section class="widget worksync-header">
+    <div class="widget-content">
+      <optim-workload-submission />
+    </div>
+  </section>
+</div>
+
+<div class="worksync-columns2">
+  <div>
+    <section class="widget worksync-left-top">
+      <h3>Workload Evolution</h3>
+      <div class="widget-content">
+        <optim-workload-evolution />
+      </div>
+    </section>
+
+    <div class="worksync-columns2 w50">
+      <section class="widget worksync-left-middle">
+        <h3>OWN vs SUB</h3>
+        <div class="widget-content">
+          <optim-worksync-own-sub />
+        </div>
+      </section>
+
+      <section class="widget worksync-left-middle">
+        <h3>Direct vs Indirect</h3>
+        <div class="widget-content">
+          <optim-worksync-direct-indirect />
+        </div>
+      </section>
+    </div>
+
+    <section class="widget worksync-left-bottom">
+      <h3>Workload per program</h3>
+      <div class="widget-content">
+        <optim-workload-per-program />
+      </div>
+    </section>
+  </div>
+
+  <section class="widget worksync-right">
+    <h3>Workload vs Workforce</h3>
+    <div class="widget-content">
+      <div class="workload-workforce-container">
+        <div>
+          <optim-chart-selector [selectorType]="'worksync'" />
+        </div>
+        <div class="workload-workforce-charts-container">
+          <div class="workload-workforce-chart-content">
+            <optim-workload-workforce />
+          </div>
+          <div class="workload-workforce-chart-content">
+            <h3>Monthly Distribution</h3>
+            <div class="workload-workforce-chart-content--monthly">
+              <optim-workout-monthly-distribution />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

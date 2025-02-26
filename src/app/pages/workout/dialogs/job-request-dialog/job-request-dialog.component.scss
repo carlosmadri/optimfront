@@ -1,0 +1,112 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use 'optim-theme';
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.jrInformation-columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: 15px;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+mat-card {
+  background-color: map.get(optim-theme.$palette, theme-main);
+
+  mat-card-subtitle {
+    color: map.get(optim-theme.$palette, white);
+  }
+
+  mat-error.mat-mdc-form-field-error {
+    color: map.get(optim-theme.$palette, red);
+  }
+
+  button {
+    background-color: map.get(optim-theme.$palette, graph-yellow);
+  }
+}
+
+.card__status {
+  mat-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+}
+
+.card_message {
+  .mat-mdc-card-content {
+    height: 100%;
+  }
+  .approval-pending-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+
+.card__information {
+  margin: 15px 0;
+
+  textarea.mat-mdc-input-element {
+    height: 100px;
+  }
+}
+
+.actions__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.actions__button--cancel {
+  background-color: map.get(optim-theme.$palette, red);
+  color: map.get(optim-theme.$palette, white);
+}
+
+.highlighted-message {
+  font-weight: 500;
+  font-size: 1.1em;
+  color: map.get(optim-theme.$palette, graph-yellow);
+}
+
+mat-hint {
+  color: map.get(optim-theme.$palette, grey3);
+}
+
+.approval-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  background-color: map.get(optim-theme.$primary, 80);
+  border-radius: 0 0 10px 10px;
+  
+  .mdc-switch--checked .mdc-switch:enabled {
+    background: map.get(optim-theme.$palette, graph-yellow);
+  }
+}
+
+.workday-link {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+
+  mat-icon.mat-icon {
+    margin-left: 5px;
+  }
+}

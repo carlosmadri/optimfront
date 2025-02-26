@@ -1,0 +1,61 @@
+@use 'optim-theme';
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+
+  .content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .action-button {
+      @include mat.button-theme(optim-theme.$dark-theme);
+      box-shadow: none;
+      background-color: map.get(optim-theme.$palette, theme-main);
+    }
+
+    .button-text__file {
+      font-weight: 400;
+      margin-left: 5px;
+      color: map.get(optim-theme.$palette, grey3);
+    }
+
+    .button-text__submit {
+      font-weight: 400;
+      margin-left: 10px;
+      color: map.get(optim-theme.$palette, widget-yellow);
+    }
+
+    .button-text__validate {
+      font-weight: 400;
+      margin-left: 5px;
+      color: map.get(optim-theme.$palette, widget-green2);
+    }
+
+    .file-icon {
+      transform: scale(1.6);
+      color: map.get(optim-theme.$palette, white);
+    }
+
+    .submit-icon {
+      transform: scale(1.6);
+      color: map.get(optim-theme.$palette, widget-yellow);
+    }
+
+    .validate-icon {
+      transform: scale(1.7);
+      color: map.get(optim-theme.$palette, widget-green2);
+    }
+  }
+}

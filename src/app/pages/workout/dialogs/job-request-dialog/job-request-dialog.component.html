@@ -1,0 +1,305 @@
+@if (form()) {
+  <mat-dialog-content>
+    <form [formGroup]="form()!">
+      <div class="two-columns">
+        <mat-card appearance="outlined" class="card__status">
+          <mat-card-header>
+            <mat-card-subtitle>Current JR Status</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            @if (jrStatus()) {
+              <mat-chip [highlighted]="true">{{ jrStatus() }}</mat-chip>
+            }
+            @if (!jrStatus() || jrStatus() === JobRequestStatus.ON_HOLD) {
+              <button mat-stroked-button class="status__button--submit" (click)="submit()">Submit</button>
+            }
+            @if (jrStatus() && (jrStatus() === JobRequestStatus.OPENED || jrStatus() === JobRequestStatus.FILLED)) {
+              <button mat-button class="workday-link" (click)="openWorkday()">Open Workday<mat-icon>open_in_new</mat-icon></button>
+            }
+          </mat-card-content>
+        </mat-card>
+
+        @if (jrStatus() && jrStatus() !== JobRequestStatus.ON_HOLD) {
+          <mat-card appearance="outlined" class="card_message">
+            <mat-card-content>
+              @if (jrStatus() === 'Opened' || jrStatus() === 'Filled') {
+                <div class="two-columns">
+                  <mat-form-field>
+                    <mat-label>Number</mat-label>
+                    <span matTextPrefix>JR &nbsp;</span>
+                    <input matInput placeholder="" maxlength="8" formControlName="workdayNumber" />
+                    @if (form()!.get('workdayNumber')?.hasError('pattern') && form()!.get('workdayNumber')?.touched) {
+                      <mat-error>{{ workdayNumberFormat }}</mat-error>
+                    }
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Candidate's name</mat-label>
+                    <input matInput placeholder="" formControlName="candidate" />
+                  </mat-form-field>
+                </div>
+              } @else {
+                <div class="approval-pending-message highlighted-message">
+                  <span>JR successfully submitted</span>
+                  <span>Await for approval</span>
+                </div>
+              }
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <mat-card appearance="outlined" class="card__information">
+        <mat-card-header>
+          <mat-card-subtitle>JR Information</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="jrInformation-columns">
+            <div>
+              <div class="two-columns">
+                <mat-form-field>
+                  <mat-label>Type</mat-label>
+                  <mat-select formControlName="type">
+                    @for (option of jrTypesOptions; track option) {
+                      <mat-option [value]="option">{{ option }}</mat-option>
+                    }
+                  </mat-select>
+                  @if (form()!.get('type')?.hasError('required') && form()!.get('type')?.touched) {
+                    <mat-error>{{ requiredFieldError }}</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-label>Siglum destination</mat-label>
+                  <mat-select formControlName="siglum">
+                    @for (option of allSiglums(); track option) {
+                      <mat-option [value]="option.id">{{ option.siglumHR }}</mat-option>
+                    }
+                  </mat-select>
+                  @if (form()!.get('siglum')?.hasError('required') && form()!.get('siglum')?.touched) {
+                    <mat-error>{{ requiredFieldError }}</mat-error>
+                  }
+                </mat-form-field>
+              </div>
+
+              <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description"></textarea>
+                @if (form()!.get('description')?.hasError('required') && form()!.get('description')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+            </div>
+
+            <div class="jr-information-col2">
+              <mat-form-field>
+                <mat-label>Direct / Indirect</mat-label>
+                <mat-select formControlName="direct">
+                  @for (option of jrDirectOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                  }
+                </mat-select>
+                @if (form()!.get('direct')?.hasError('required') && form()!.get('direct')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Worker Type</mat-label>
+                <mat-select formControlName="activeWorkforce">
+                  @for (option of jrWorkerTypeOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                  }
+                </mat-select>
+                @if (form()!.get('activeWorkforce')?.hasError('required') && form()!.get('activeWorkforce')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Collar</mat-label>
+                <mat-select formControlName="collar">
+                  @for (option of jrCollarTypeOptions; track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                  }
+                </mat-select>
+                @if (form()!.get('collar')?.hasError('required') && form()!.get('collar')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="jr-information-col3">
+              <mat-form-field>
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                  @for (option of countryOptions(); track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                  }
+                </mat-select>
+                @if (form()!.get('country')?.hasError('required') && form()!.get('country')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Site</mat-label>
+                <mat-select formControlName="site">
+                  @for (option of siteOptions(); track option) {
+                    <mat-option [value]="option">{{ option }}</mat-option>
+                  }
+                </mat-select>
+                @if (form()!.get('site')?.hasError('required') && form()!.get('site')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Kapis code</mat-label>
+                <input matInput formControlName="kapisCode" maxlength="4" inputmode="numeric" (keyup)="checkKapisCode()" />
+                @if (form()!.get('kapisCode')?.hasError('required') && form()!.get('kapisCode')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+                @if (form()!.get('kapisCode')?.hasError('pattern')) {
+                  <mat-error>Accepted format: ####</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="jr-information-col4">
+              <mat-form-field>
+                <mat-label>Cost center</mat-label>
+                <input matInput readonly disabled [value]="form()!.get('costCenter')?.value?.costCenterCode" />
+                @if (form()!.get('costCenter')?.hasError('required') && form()!.get('costCenter')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field>
+                <mat-label>Starting Date</mat-label>
+                <input matInput formControlName="startDate" [matDatepicker]="pickerStartDate" (dateChange)="formatDateValue('startDate', $event)" />
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="pickerStartDate" />
+                <mat-datepicker #pickerStartDate startView="year" [startAt]="today" />
+                @if (form()!.get('startDate')?.hasError('required') && form()!.get('startDate')?.touched) {
+                  <mat-error>{{ requiredFieldError }}</mat-error>
+                }
+              </mat-form-field>
+              @if (form()!.controls['releaseDate']) {
+                <mat-form-field>
+                  <mat-label>Release Date</mat-label>
+                  <input matInput formControlName="releaseDate" [matDatepicker]="pickerReseaseDate" (dateChange)="formatDateValue('releaseDate', $event)" />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="pickerReseaseDate" />
+                  <mat-datepicker #pickerReseaseDate startView="year" [startAt]="today" />
+                  @if (form()!.get('releaseDate')?.hasError('required') && form()!.get('releaseDate')?.touched) {
+                    <mat-error>{{ requiredFieldError }}</mat-error>
+                  }
+                </mat-form-field>
+              }
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="two-columns">
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-card-subtitle>JR Profile</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>On top of HC Target?</mat-label>
+              <mat-select formControlName="onTopHct">
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              @if (form()!.get('onTopHct')?.hasError('required') && form()!.get('onTopHct')?.touched) {
+                <mat-error>{{ requiredFieldError }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Externalised?</mat-label>
+              <mat-select formControlName="external">
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              @if (form()!.get('external')?.hasError('required') && form()!.get('external')?.touched) {
+                <mat-error>{{ requiredFieldError }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Early career?</mat-label>
+              <mat-select formControlName="earlyCareer">
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              @if (form()!.get('earlyCareer')?.hasError('required') && form()!.get('earlyCareer')?.touched) {
+                <mat-error>{{ requiredFieldError }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Critical or Emerging Jobs?</mat-label>
+              <mat-select formControlName="isCritical">
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              @if (form()!.get('isCritical')?.hasError('required') && form()!.get('isCritical')?.touched) {
+                <mat-error>{{ requiredFieldError }}</mat-error>
+              }
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+
+        @if (jrStatus() && jrStatus() !== JobRequestStatus.ON_HOLD) {
+          <mat-card appearance="outlined">
+            <mat-card-header>
+              <mat-card-subtitle>Approval Process</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content class="approval-container">
+              <div>
+                <mat-slide-toggle formControlName="approvedQMC">Approved by the QMC</mat-slide-toggle>
+              </div>
+              <div>
+                @if (displayApprovalStepOnEdit.approvedSHRBPHOT1Q) {
+                  <mat-slide-toggle formControlName="approvedSHRBPHOT1Q">Approved by the SHRBP/HO T1Q</mat-slide-toggle>
+                }
+              </div>
+              <div>
+                @if (displayApprovalStepOnEdit.approvedHOCOOHOHRCOO) {
+                  <mat-slide-toggle formControlName="approvedHOCOOHOHRCOO">Approved by the HO COO/HO HR COO</mat-slide-toggle>
+                }
+              </div>
+              <div>
+                @if (displayApprovalStepOnEdit.approvedEmploymentCommitee) {
+                  <mat-slide-toggle formControlName="approvedEmploymentCommitee">Approved by the Employment Commitee</mat-slide-toggle>
+                }
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="actions__container">
+      <span>
+        <button mat-stroked-button class="actions__button--cancel" (click)="delete()">Delete</button>
+        @if (!isEdit()) {
+          <button mat-stroked-button (click)="openCopyCurrent()">Copy Current</button>
+        }
+      </span>
+      <span>
+        <button mat-button mat-dialog-close>Close</button>
+        <button mat-flat-button (click)="save()">Save</button>
+      </span>
+    </div>
+  </mat-dialog-actions>
+} @else {
+  <mat-dialog-content>
+    <p>Loading form...</p>
+  </mat-dialog-content>
+}
+
+<ng-template #employeeTemplate>
+  <optim-select-employee-table (employeeSelected)="copyCurrentEmployee($event)" />
+</ng-template>

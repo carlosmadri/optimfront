@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="content content_download">
+    <button mat-raised-button class="action-button">
+      <mat-icon class="file-icon">download</mat-icon>
+      <span class="button-text__file">Download Flat File</span>
+    </button>
+  </div>
+
+  <div class="content content_upload">
+    <button mat-raised-button class="action-button" (click)="openUploadDialog()">
+      <mat-icon class="file-icon">upload</mat-icon>
+      <span class="button-text__file">Upload Flat File</span>
+    </button>
+  </div>
+
+  <div class="content content_submit">
+    <button mat-raised-button class="action-button" (click)="openSubmitDialog()">
+      <mat-icon class="submit-icon">send</mat-icon>
+      <span class="button-text__submit">Submit</span>
+    </button>
+  </div>
+
+  <div class="content content_validate">
+    <button mat-raised-button class="action-button" (click)="openValidateDialog()">
+      <mat-icon class="validate-icon">check_circle</mat-icon>
+      <span class="button-text__validate">Validate</span>
+    </button>
+  </div>
+</div>
+
+<ng-template #submitTemplate>
+  <optim-siglum-selection [isSubmit]="true" (siglumsSelection)="submitSiglums($event)" />
+</ng-template>
+
+<ng-template #validateTemplate>
+  <optim-siglum-selection [isSubmit]="false" (siglumsSelection)="validateSiglums($event)" />
+</ng-template>
+
+<ng-template #uploadTemplate>
+  <optim-workload-upload (upload)="uploadFile($event)" />
+</ng-template>

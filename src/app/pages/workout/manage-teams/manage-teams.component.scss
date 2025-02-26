@@ -1,0 +1,21 @@
+@use 'optim-theme';
+@use 'widget';
+@use 'buttons';
+@use 'sass:map';
+
+@include buttons.table-header-button;
+@include buttons.widget-button;
+@include widget.widget;
+
+.table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  .filters-accordion {
+    border-radius: unset;
+    box-shadow: none;
+    border: 1px solid #eeeeee;
+  }
+  .active-filters {
+    color:  map.get(optim-theme.$palette, graph-orange);
+  }
+}

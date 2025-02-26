@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="filter-container">
+    <optim-filter-name (filterByName)="filterByName($event)" />
+  </div>
+
+  <div class="table-content">
+    <table mat-table matSort multiTemplateDataRows class="mat-elevation-z8" [dataSource]="dataSource()!">
+      @for (column of columnsToDisplay; track column; let idx = $index) {
+        <ng-container [matColumnDef]="column">
+          @if (idx === 0) {
+            <th *matHeaderCellDef mat-header-cell [mat-sort-header]="sortByName">{{ column }}</th>
+          } @else {
+            <th *matHeaderCellDef mat-header-cell>{{ column }}</th>
+          }
+          <td *matCellDef="let element" mat-cell>
+            @if (column === 'Select employee') {
+              <button mat-icon-button class="select-employee-icon" (click)="onSelect(element.id)">
+                <mat-icon>emoji_people</mat-icon>
+              </button>
+            } @else {
+              {{ element[elementKeys[idx]] }}
+            }
+          </td>
+        </ng-container>
+      }
+      <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
+    </table>
+  </div>
+
+  <div class="paginator-content">
+    <mat-paginator
+      class="table-paginator"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageSize]="defaultPageSize"
+      [length]="totalEmployees()"
+    />
+  </div>
+</div>

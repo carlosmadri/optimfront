@@ -1,0 +1,34 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.table-content {
+  flex-grow: 1;
+}
+
+table {
+  width: 100%;
+  box-shadow: none;
+}
+
+.filter-container {
+  display: flex;
+}
+
+.mat-column-Select-employee {
+  width: 142px;
+  text-align: center;
+}
+
+button.select-employee-icon:hover {
+  color: map.get(optim-theme.$palette, blue3);
+}

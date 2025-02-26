@@ -1,0 +1,37 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-container {
+  padding: 10px 10px 0  10px;
+  h4 {
+    margin: 0;
+    font-weight: 300;
+    padding-bottom: 5px;
+  }
+
+  .edit-checks {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .edit-workload, .edit-workforce {
+    display: flex;
+    align-items: center;
+    > span {
+      margin-right: 15px;
+      font-size: 0.6em;
+      color: map.get(optim-theme.$primary, 70);
+    }
+    
+    .mat-mdc-checkbox.edit-check {
+      margin-right: 10px;
+      --mat-checkbox-label-text-size: 0.6em;
+      --mdc-checkbox-state-layer-size: 20px;
+    }
+  }
+}

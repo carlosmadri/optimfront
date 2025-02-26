@@ -1,0 +1,10 @@
+<h2 mat-dialog-title [class]="data.type">
+  <mat-icon inline class="icon">{{ data.type }}</mat-icon>
+  {{ data.title }}
+</h2>
+<mat-dialog-content>
+  {{ data.content }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,20 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+.dialog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 10px;
+  
+  &-title {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    h3 {
+      margin-right: 15px;
+      color: map.get(optim-theme.$neutral, 30);
+    }
+  }
+}

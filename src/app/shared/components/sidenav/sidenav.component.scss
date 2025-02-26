@@ -1,0 +1,102 @@
+@use 'sass:map';
+@use 'optim-theme';
+@use '@angular/material' as mat;
+
+.nav-container {
+  border-right: 5px solid map.get(optim-theme.$palette, green);
+
+  a {
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .home-buttom {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 0;
+    @include mat.button-theme(optim-theme.$dark-theme);
+    &.mat-mdc-button:not(:disabled) {
+      color: map.get(optim-theme.$palette, grey2);
+      &.active {
+        color: map.get(optim-theme.$palette, white);
+        background-color: map.get(optim-theme.$palette, blue4);
+        mat-icon {
+          color: map.get(optim-theme.$palette, white);
+        }
+      }
+    }
+    mat-icon {
+      color: map.get(optim-theme.$palette, grey2);
+    }
+  }
+
+  mat-tree.mat-tree {
+    @include mat.tree-theme(optim-theme.$dark-theme);
+    background-color: map.get(optim-theme.$palette, theme-main);
+    mat-tree-node.mat-tree-node {
+      display: flex;
+      align-items: stretch;
+      padding-left: 25px;
+      min-height: 40px;
+      a {
+        flex-grow: 1;
+        padding: 10px 5px 10px 5px;
+        color: map.get(optim-theme.$palette, grey2);
+      }
+      &.active {
+        background-color: map.get(optim-theme.$palette, blue4);
+        a {
+          color: map.get(optim-theme.$palette, white);
+        }
+      }
+      &:hover:not(.active) {
+        background-color: map.get(optim-theme.$palette, blue3);
+      }
+      .mat-icon {
+        color: map.get(optim-theme.$palette, grey2);
+      }
+    }
+
+    .mat-tree-node {
+      min-height: 40px;
+      position: relative;
+
+      .node-wrapper {
+        display: flex;
+        align-items: center;
+        padding-left: 25px;
+        width: 100%;
+      }
+    
+      .node-line {
+        position: absolute;
+        left: 25px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: map.get(optim-theme.$palette, blue5);
+      }
+    
+      .node-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: map.get(optim-theme.$palette, blue5);
+        margin-right: 8px;
+        margin-left: -4px;
+        z-index: 1;
+      }
+
+      .node-child-line {
+        position: absolute;
+        left: 65px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: map.get(optim-theme.$palette, blue5);
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<div class="container">
+  @if (!file) {
+    <p class="message">Upload a flat file to replace the existing one.</p>
+    <input type="file" (change)="onUpload($event)" />
+  } @else {
+    <p class="message">
+      You are about to upload the file <b>{{ file.name }}</b> and replace the existing one. Are you sure you want to proceed?
+    </p>
+    <button mat-flat-button (click)="submit()">Confirm</button>
+  }
+</div>

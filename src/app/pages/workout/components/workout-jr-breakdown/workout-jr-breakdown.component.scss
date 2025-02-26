@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.chart-container{
+  display: flex;
+  justify-content: center;
+  margin: 10px auto 5px auto;
+  max-width: 100px;
+}
+
+.jr-breakdown-row {
+  margin: 0 15% 0 15%;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  &:last-of-type {
+    margin: 0 15% 10px 15%;
+  }
+
+  .jr-breakdown-row-title {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 10px;
+  }
+}

@@ -1,0 +1,54 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+@use 'optim-theme';
+
+@mixin widget {
+  .widget {
+    display: flex;
+    flex-direction: column;
+    height: 36vh;
+    &.outlook {
+      height: 20vh;
+    }
+    &.worksync-header {
+      height: 8vh;
+    }
+    &.worksync-right {
+      height: 84vh;
+    }
+    &.worksync-left-top {
+      height: 41vh;
+    }
+    &.worksync-left-middle {
+      height: 15.5vh;
+    }
+    &.worksync-left-bottom {
+      height: 27.5vh;
+    }
+    &.workload-preview {
+      height: 12vh;
+    }
+    h3 {
+      margin: 0 0 5px 0;
+      font-size: clamp(12px, 1.2em, 1.2em);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 23px;
+    }
+    .title-with-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+    }
+    div.widget-content {
+      overflow-y: auto;
+      flex-grow: 1;
+      color: map.get(optim-theme.$palette, white);
+      background-color: map.get(optim-theme.$palette, theme-main);
+      @include mat.checkbox-theme(optim-theme.$dark-theme);
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+  }
+}

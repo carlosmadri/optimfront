@@ -1,0 +1,7 @@
+<button mat-icon-button aria-label="Select previous year" [disabled]="selectedYear() <= minYear" (click)="previous()">
+  <mat-icon>arrow_left</mat-icon>
+</button>
+<span>{{ selectedYear() }}</span>
+<button mat-icon-button aria-label="Select next year" [disabled]="selectedYear() >= maxYear" (click)="next()">
+  <mat-icon>arrow_right</mat-icon>
+</button>

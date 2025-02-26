@@ -1,0 +1,71 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+.container {
+  display: flex;
+  height: 100%;
+
+  .graph {
+    display: flex;
+    width: 75%;
+    height: 100%;
+  }
+
+  .program-selector {
+    width: 25%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 0.9em;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__navigation {
+      display: flex;
+      &--button.mat-mdc-button-disabled mat-icon.program-selector__navigation--arrow{
+        color: map.get(optim-theme.$palette, blue3);
+      }
+      &--arrow {
+        color: map.get(optim-theme.$palette, grey1);
+        transform: scale(1.5);
+      }
+    }
+
+    &__title {
+      color: map.get(optim-theme.$palette, grey3);
+    }
+
+    &__name {
+      font-size: 1.2em;
+      color: map.get(optim-theme.$palette, widget-yellow);
+    }
+
+    &__list {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    &__value {
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+
+    &__property {
+      color: map.get(optim-theme.$palette, grey3);
+      padding-left: 5px;
+    }
+  }
+}
+
+.no-data {
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

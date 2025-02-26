@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="data-container">
+    <div class="data-content">
+      <span class="title direct">Direct</span><span class="value">{{ directData() }}</span>
+    </div>
+    <div class="data-content">
+      <span class="title indirect">Indirect</span><span class="value">{{ indirectData() }}</span>
+    </div>
+  </div>
+  <div class="chart-container">
+    <div class="chart">
+      <optim-donut-chart [data]="[directData(), indirectData()]" [colors]="[directColor, indirectColor]" [title]="total() + '%'" />
+    </div>
+  </div>
+</div>

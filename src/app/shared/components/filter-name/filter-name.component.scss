@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use 'optim-theme';
+
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  form {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+.mat-accordion .mat-expansion-panel.filters-accordion {
+  border-radius: unset;
+  background-color: map.get(optim-theme.$palette, grey1);
+  box-shadow: none;
+}
+
+.submit-filters {
+  margin-bottom: 20px;
+}
+
+.active-filters {
+  color:  map.get(optim-theme.$palette, graph-orange);
+}

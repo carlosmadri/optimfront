@@ -1,0 +1,48 @@
+@use 'optim-theme';
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+:host {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &.status-selector {
+      align-items: center;
+      @include mat.slide-toggle-theme(optim-theme.$dark-theme);
+    }
+
+    &__title {
+      font-size: 0.8em;
+      color: map.get(optim-theme.$palette, grey3);
+    }
+
+    &__value {
+      font-size: 1.3em;
+      font-weight: 500;
+      padding-top: 3px;
+    }
+
+    .status-green {
+      color: map.get(optim-theme.$palette, widget-green2);
+    }
+
+    .status-orange {
+      color: map.get(optim-theme.$palette, widget-yellow);
+    }
+
+    .status-red {
+      color: map.get(optim-theme.$palette, red);
+    }
+  }
+}

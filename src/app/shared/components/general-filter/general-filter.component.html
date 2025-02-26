@@ -1,0 +1,37 @@
+<div class="general-filters">
+  <div class="grid-container">
+    <h3>Filters</h3>
+    <button mat-flat-button class="widget-button grid-end" [disabled]="formFilters.length < 2" (click)="clearFilters()">Clear filters</button>
+  </div>
+  @for (form of formFilters; track form) {
+    <form [formGroup]="form">
+      <mat-form-field>
+        <mat-label>Field</mat-label>
+        <mat-select formControlName="field" (openedChange)="onSelectFieldOpen($event, form)">
+          @for (formField of form.value.formFields; track formField) {
+            <mat-option optimClickStopPropagation [value]="formField">{{ formField }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if (form.value.field !== '') {
+        <mat-form-field class="select-filter-values">
+          <mat-label>Values</mat-label>
+          <mat-select formControlName="values" multiple (selectionChange)="valueSelected($event, form)" (openedChange)="onSelectValueOpen($event, form)">
+            @for (formValue of form.value.formValues; track formValue) {
+              <mat-option optimClickStopPropagation [value]="formValue">{{ formValue }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <button class="delete-button" mat-fab aria-label="Button with a delete icon" (click)="deleteFilter(form)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      }
+    </form>
+  }
+  <div>
+    <button mat-flat-button class="widget-button" [disabled]="disableAddFilter" (click)="addForm()">
+      <mat-icon>add</mat-icon>
+      ADD A FILTER
+    </button>
+  </div>
+</div>

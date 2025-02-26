@@ -1,0 +1,10 @@
+<div class="dialog__header">
+  <div class="dialog__header-title">
+    <h3>Employees with levers</h3>
+    <button mat-dialog-close mat-stroked-button [routerLink]="'/workout/manage-team'">Manage team <mat-icon>add</mat-icon></button>
+  </div>
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content>
+  <optim-workout-employee-table />
+</mat-dialog-content>

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="chart-container">
+    <div class="chart">
+      <optim-donut-chart [data]="[ownData(), subData()]" [colors]="[ownColor, subColor]" [title]="total() + '%'" />
+    </div>
+  </div>
+  <div class="data-container">
+    <div class="data-content">
+      <span class="title own">Own</span><span class="value">{{ ownData() }}</span>
+    </div>
+    <div class="data-content">
+      <span class="title sub">Sub</span><span class="value">{{ subData() }}</span>
+    </div>
+  </div>
+</div>

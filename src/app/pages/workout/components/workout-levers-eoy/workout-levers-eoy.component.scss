@@ -1,0 +1,27 @@
+@use 'optim-theme';
+@use 'sass:map';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.data-names {
+  display: flex;
+  text-align: center;
+  font-size: 0.9em;
+  margin: 10px 0;
+  span {
+    width: 50%;
+    padding: 0 5px;
+  }
+  span:nth-of-type(1) {
+    color: map.get(optim-theme.$palette, graph-red);
+    text-align: right;
+  }
+  span:nth-of-type(2) {
+    color: map.get(optim-theme.$palette, widget-blue1);
+    text-align: left;
+  }
+}

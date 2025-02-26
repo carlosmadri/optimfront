@@ -1,0 +1,118 @@
+<h4 mat-dialog-title>Lever information</h4>
+<mat-dialog-content class="lever-dialog">
+  <form class="lever-form" [formGroup]="form">
+    <div class="lever-destination">
+      <mat-form-field class="large-input">
+        <mat-label>Lever Type</mat-label>
+        <mat-select formControlName="leverType">
+          @for (type of leverTypes; track type) {
+            <mat-option optimClickStopPropagation [value]="type">{{ type }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      @if (showFormField()[fields.FTE]) {
+        <mat-form-field class="small-input">
+          <mat-label>FTE</mat-label>
+          <input type="number" step="0.1" matInput formControlName="fte" />
+        </mat-form-field>
+      }
+      @if (form.controls.fte.invalid && form.controls.fte.dirty) {
+        <mat-icon class="lever-tooltip" [matTooltip]="fteWarningMsg" [matTooltipDisabled]="form.controls.fte.valid">warning</mat-icon>
+      }
+    </div>
+    @if (form.controls.leverType.value === 'Temp release' || form.controls.leverType.value === 'Mobility Out') {
+      <div class="lever-warning"><mat-icon>warning</mat-icon> Alert! There is a Redeployment type lever created.</div>
+    }
+    <mat-form-field>
+      <mat-label>Comments (optional)</mat-label>
+      <textarea matInput formControlName="highlights"></textarea>
+    </mat-form-field>
+    @if (showFormField()[fields.SIGLUM_HR]) {
+      <div class="section">
+        <span class="title">Siglum Info</span>
+        <div class="form-section">
+          <mat-form-field>
+            <mat-label>Siglum destination</mat-label>
+            <mat-select formControlName="siglumHR" (valueChange)="siglumSelected($event)">
+              @for (siglum of allSiglumsHR(); track siglum) {
+                <mat-option optimClickStopPropagation [value]="siglum">{{ siglum }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    }
+    @if (showFormField()[fields.COUNTRY]) {
+      <div class="section">
+        <span class="title">Site info</span>
+        <div class="form-section">
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="country">
+              @for (countryValue of allCountries(); track countryValue) {
+                <mat-option [value]="countryValue">{{ countryValue }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (showFormField()[fields.SITE]) {
+            <mat-form-field>
+              <mat-label>Site</mat-label>
+              <mat-select formControlName="site">
+                @for (siteValue of allSites(); track siteValue) {
+                  <mat-option [value]="siteValue">{{ siteValue }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+        </div>
+      </div>
+    }
+    @if (showFormField()[fields.ACTIVE_WORKFORCE]) {
+      <div class="section">
+        <span class="title">Employee's info</span>
+        <div class="form-section">
+          <mat-form-field>
+            <mat-label>Workforce Type</mat-label>
+            <mat-select formControlName="activeWorkforce">
+              @for (workforceValue of allActiveWorkforce(); track workforceValue) {
+                <mat-option [value]="workforceValue">{{ workforceValue }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          @if (showFormField()[fields.DIRECT]) {
+            <mat-form-field>
+              <mat-label>Direct / Indirect</mat-label>
+              <mat-select formControlName="direct">
+                @for (directValue of allDirects(); track directValue) {
+                  <mat-option [value]="directValue">{{ directValue }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          }
+        </div>
+      </div>
+    }
+    <div class="dates">
+      <mat-form-field>
+        <mat-label>Lever Start</mat-label>
+        <input matInput formControlName="startDateValue" [matDatepicker]="pickerStartDate" (dateChange)="formatDateValue('startDate', $event)" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="pickerStartDate" />
+        <mat-datepicker #pickerStartDate startView="year" [startAt]="today" />
+      </mat-form-field>
+      @if (showFormField()[fields.END_DATE]) {
+        <mat-form-field>
+          <mat-label>Lever End</mat-label>
+          <input matInput formControlName="endDateValue" [matDatepicker]="pickerEndDate" (dateChange)="formatDateValue('endDate', $event)" />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerEndDate" />
+          <mat-datepicker #pickerEndDate startView="year" [startAt]="today" />
+        </mat-form-field>
+      }
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="form.getRawValue()" [disabled]="form.invalid">Submit</button>
+</mat-dialog-actions>
